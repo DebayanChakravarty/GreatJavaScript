@@ -1,45 +1,40 @@
 document.addEventListener('DOMContentLoaded',function(){
-
-    const defaultCount = document.getElementById('defaultCount');
-    const throttleCount = document.getElementById('throttleCount');
+    const defaultConterText = document.getElementById("defaultCounter");
+    const throttleCounterText = document.getElementById("throttleCounter");
 
 
 
     document.addEventListener('mousemove',function(){
-        MyCounter(defaultCount);
+        myCounter(defaultConterText);
         implementThrottle();
-
     })
 
-
-    const implementThrottle = throttLe(()=>{
-         MyCounter(throttleCount);
+    const implementThrottle = myThrottle(()=>{
+        myCounter(throttleCounterText);
     },1000)
 
-    function throttLe(fn,wait){
-        let shouldWait = false;
+
+    function myThrottle(fn,wait=500){
+        shouldWait = false;
 
         return function(...args){
+
             if(shouldWait) return;
 
             fn.call(this, ...args);
+
             shouldWait = true;
 
-
-            setTimeout(()=>{
-                shouldWait = false;
-            },wait)
-
+            setTimeout(()=>{ shouldWait = false; },wait)
 
         }
+
     }
 
 
-    function MyCounter(elements){
-        elements.textContent = (parseInt(elements.innerText) || 0) + 1; 
+    function myCounter(element){
+        element.textContent = (parseInt(element.innerText) || 0) + 1;
     }
-
-  
 
 
 })
