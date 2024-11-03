@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     function deBounce(fn,wait=500){
-        let timer = null;
+        let timer;
 
         return function(...args){
             clearTimeout(timer);
 
-            timer = setInterval(()=>{
+            timer = setTimeout(()=>
                 fn.apply(this, args)
-            },wait);
+            ,wait);
 
 
 
